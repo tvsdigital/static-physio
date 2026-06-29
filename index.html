@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATIC Physiotherapie Wiesbaden — Ein starker Körper kennt keinen Schmerz</title>
+    <meta name="description" content="STATIC Physiotherapie in Wiesbaden (Moritzstraße 37) von Alessio Gulino. Ganzheitliche Behandlung, individuelles Personal Training & therapeutische Betreuung.">
+    
+    <!-- Google Fonts: Inter for elegant readability, Prompt for modern professional touch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS & Iconify -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Tailwind Configuration for customized brand colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGreen: '#133d25', // Deep green extracted from static.physio logo
+                        brandGreenLight: '#1d5434',
+                        brandGreenSoft: '#f4f7f5',
+                        brandDark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Prompt', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        /* Custom minimalist scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #133d25; }
+        
+        /* Reveal animations */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased selection:bg-brandGreen/10 selection:text-brandGreen overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 md:top-6 inset-x-4 md:inset-x-8 z-50 flex justify-center pointer-events-none transition-all duration-300">
+        <div class="pointer-events-auto w-full max-w-7xl bg-white/95 backdrop-blur-[12px] rounded-2xl h-[65px] px-4 md:px-6 flex items-center justify-between shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100">
+            <!-- Brand Logo & Name -->
+            <a href="#" class="flex items-center gap-3">
+                <img src="static-physio-logo.png" alt="STATIC Physiotherapie Logo" class="h-10 w-10 rounded-lg object-cover border border-brandGreen/10">
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-lg text-brandGreen tracking-wider leading-none">STATIC</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Physiotherapie</span>
+                </div>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-brandGreen transition-colors">Home</a>
+                <a href="#services" class="text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-brandGreen transition-colors">Leistungen</a>
+                <a href="#philosophie" class="text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-brandGreen transition-colors">Philosophie</a>
+                <a href="#flyer" class="text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-brandGreen transition-colors">Praxis-Info</a>
+                <a href="#contact" class="text-xs font-semibold text-gray-600 uppercase tracking-wider hover:text-brandGreen transition-colors">Kontakt</a>
+            </div>
+            
+            <!-- Appointment & Social Quick Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="https://www.doctolib.de/physiotherapie/wiesbaden/alessio-gulino?pid=practice-754459&utm_source=google_appointment_redirect&utm_campaign=gmb&utm_medium=organic&rwg_token=AE37R_i5X8fpCUjFRjcD0_JEyOYvzPGfyfuFTlF-Hzb72hBrG0KX4-wJdtAj2TxqCF1mJwhfFHQrBP4TyuZDGwRXhLm0U7fHiA%3D%3D" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-brandGreen rounded-xl hover:bg-brandGreenLight shadow-md shadow-brandGreen/10 hover:shadow-lg transition-all duration-300">
+                    <iconify-icon icon="solar:calendar-date-bold-duotone" class="mr-1.5 text-sm"></iconify-icon>
+                    Termin buchen
+                </a>
+                
+                <!-- Mobile Navigation Menu Toggle -->
+                <button id="mobileMenuBtn" class="md:hidden text-brandGreen w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-50 transition-colors" aria-label="Menü öffnen">
+                    <iconify-icon icon="solar:hamburger-menu-line-duotone" class="text-2xl"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-brandDark/40 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex justify-end">
+        <div class="bg-white w-3/4 max-w-sm h-full p-8 flex flex-col justify-between shadow-2xl translate-x-full transition-transform duration-300" id="mobileMenuContent">
+            <div>
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <img src="static-physio-logo.png" alt="STATIC Logo" class="h-8 w-8 rounded-md object-cover">
+                        <span class="font-heading font-bold text-brandGreen tracking-wider">STATIC</span>
+                    </div>
+                    <button id="closeMenuBtn" class="text-gray-500 hover:text-brandGreen p-1" aria-label="Menü schließen">
+                        <iconify-icon icon="solar:close-square-line-duotone" class="text-2xl"></iconify-icon>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col gap-6">
+                    <a href="#home" class="mobile-link text-sm font-semibold text-gray-700 uppercase tracking-wider hover:text-brandGreen">Home</a>
+                    <a href="#services" class="mobile-link text-sm font-semibold text-gray-700 uppercase tracking-wider hover:text-brandGreen">Leistungen</a>
+                    <a href="#philosophie" class="mobile-link text-sm font-semibold text-gray-700 uppercase tracking-wider hover:text-brandGreen">Philosophie</a>
+                    <a href="#flyer" class="mobile-link text-sm font-semibold text-gray-700 uppercase tracking-wider hover:text-brandGreen">Praxis-Info</a>
+                    <a href="#contact" class="mobile-link text-sm font-semibold text-gray-700 uppercase tracking-wider hover:text-brandGreen">Kontakt & Anfahrt</a>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-100 space-y-4">
+                <a href="https://www.doctolib.de/physiotherapie/wiesbaden/alessio-gulino?pid=practice-754459&utm_source=google_appointment_redirect&utm_campaign=gmb&utm_medium=organic&rwg_token=AE37R_i5X8fpCUjFRjcD0_JEyOYvzPGfyfuFTlF-Hzb72hBrG0KX4-wJdtAj2TxqCF1mJwhfFHQrBP4TyuZDGwRXhLm0U7fHiA%3D%3D" 
+                   target="_blank" 
+                   class="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-bold uppercase tracking-wider text-white bg-brandGreen rounded-xl hover:bg-brandGreenLight shadow-md">
+                    <iconify-icon icon="solar:calendar-date-bold-duotone" class="mr-2 text-base"></iconify-icon>
+                    Doctolib Termin
+                </a>
+                <a href="https://wa.me/491759262803" class="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-bold uppercase tracking-wider text-brandGreen border border-brandGreen/30 rounded-xl hover:bg-brandGreenSoft">
+                    <iconify-icon icon="solar:phone-calling-bold-duotone" class="mr-2 text-base"></iconify-icon>
+                    WhatsApp Chat
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[100svh] flex items-center pt-28 pb-16 overflow-hidden bg-gradient-to-br from-brandGreenSoft to-white">
+        <!-- Abstract background geometric elements matching logo green accent -->
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-brandGreenSoft/50 rounded-l-[100px] z-0 hidden lg:block"></div>
+        <div class="absolute -top-12 -left-12 w-64 h-64 bg-brandGreen/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 z-10 w-full relative">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left text content -->
+                <div class="lg:col-span-7 space-y-8 text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brandGreen border-2 border-brandGreen/20 bg-brandGreenSoft rounded-full reveal visible">
+                        <iconify-icon icon="solar:map-point-wave-bold-duotone" class="text-base"></iconify-icon>
+                        Wiesbaden Mitte — Moritzstraße 37
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl tracking-tight text-brandGreen leading-tight font-light font-heading reveal visible">
+                        Ein starker Körper <br>
+                        <span class="font-bold">kennt keinen Schmerz.</span>
+                    </h1>
+                    
+                    <div class="w-20 h-1 bg-brandGreen rounded-full reveal visible"></div>
+                    
+                    <p class="text-base md:text-lg font-normal text-gray-600 leading-relaxed max-w-xl reveal visible">
+                        Willkommen bei <strong class="text-brandGreen">STATIC Physiotherapie</strong>. Ihre Praxis für ganzheitliche therapeutische Behandlungen, maßgeschneidertes Personal Training und nachhaltige Schmerzprävention in Wiesbaden. Unser Ziel ist Ihre langfristige Beweglichkeit und Kraft.
+                    </p>
+                    
+                    <!-- Direct Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-4 reveal visible pt-2">
+                        <!-- Doctolib -->
+                        <a href="https://www.doctolib.de/physiotherapie/wiesbaden/alessio-gulino?pid=practice-754459&utm_source=google_appointment_redirect&utm_campaign=gmb&utm_medium=organic&rwg_token=AE37R_i5X8fpCUjFRjcD0_JEyOYvzPGfyfuFTlF-Hzb72hBrG0KX4-wJdtAj2TxqCF1mJwhfFHQrBP4TyuZDGwRXhLm0U7fHiA%3D%3D" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white bg-brandGreen hover:bg-brandGreenLight rounded-xl shadow-lg shadow-brandGreen/20 transition-all duration-300">
+                            Termin auf Doctolib buchen
+                            <iconify-icon icon="solar:arrow-right-up-line-duotone" class="text-lg"></iconify-icon>
+                        </a>
+                        <!-- WhatsApp/Phone -->
+                        <a href="https://wa.me/491759262803" 
+                           target="_blank" 
+                           class="inline-flex items-center justify-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider text-brandGreen border-2 border-brandGreen/20 bg-white hover:bg-brandGreenSoft rounded-xl transition-all duration-300">
+                            <iconify-icon icon="solar:chat-line-bold-duotone" class="text-xl text-green-600"></iconify-icon>
+                            WhatsApp Kontakt
+                        </a>
+                    </div>
+                    
+                    <!-- Meta info badges -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100 max-w-lg reveal visible">
+                        <div>
+                            <div class="text-3xl font-bold text-brandGreen font-heading">Privat</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1">Sowie Selbstzahler</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-brandGreen font-heading">1:1</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1">Personal Training</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-brandGreen font-heading">Online</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest font-semibold mt-1">Terminbuchung</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right column showcase of logo card -->
+                <div class="lg:col-span-5 relative flex justify-center reveal visible">
+                    <div class="relative w-full max-w-sm aspect-square bg-brandGreen rounded-[40px] shadow-2xl flex items-center justify-center p-8 overflow-hidden group">
+                        <!-- Background glow within frame -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brandGreenLight to-transparent opacity-80"></div>
+                        <div class="absolute -bottom-10 -right-10 w-44 h-44 bg-white/5 rounded-full blur-2xl"></div>
+                        
+                        <!-- Verbatim Reference to static-physio-logo.png as centered key branding -->
+                        <img src="static-physio-logo.png" alt="STATIC Physiotherapie Logo Wiesbaden" class="w-4/5 h-4/5 object-contain relative z-10 rounded-2xl shadow-lg transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctolib Special Booking Alert Bar -->
+    <section class="bg-brandGreen text-white py-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(29,84,52,0.8)_0%,rgba(19,61,37,1)_100%)] opacity-90"></div>
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="flex items-center gap-5 text-center lg:text-left flex-col sm:flex-row">
+                    <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-white text-3xl shrink-0">
+                        <iconify-icon icon="solar:shield-keyhole-bold-duotone"></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold font-heading">Einfache Online-Terminvergabe</h3>
+                        <p class="text-white/80 text-sm mt-1">Buchen Sie Ihren Wunschtermin flexibel und rund um die Uhr direkt über Doctolib.</p>
+                    </div>
+                </div>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://www.doctolib.de/physiotherapie/wiesbaden/alessio-gulino?pid=practice-754459&utm_source=google_appointment_redirect&utm_campaign=gmb&utm_medium=organic&rwg_token=AE37R_i5X8fpCUjFRjcD0_JEyOYvzPGfyfuFTlF-Hzb72hBrG0KX4-wJdtAj2TxqCF1mJwhfFHQrBP4TyuZDGwRXhLm0U7fHiA%3D%3D" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-brandGreen font-bold rounded-xl hover:bg-gray-100 transition-colors duration-300 shadow-xl uppercase tracking-wider text-sm">
+                        <iconify-icon icon="solar:calendar-date-bold-duotone" class="text-xl"></iconify-icon>
+                        Jetzt Wunschtermin sichern
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services/Leistungen Section -->
+    <section id="services" class="py-24 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 reveal">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brandGreen font-heading bg-brandGreenSoft px-3 py-1 rounded-md">Therapie & Training</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl tracking-tight text-gray-900 leading-tight font-normal font-heading">
+                        Unsere Leistungen für Sie.
+                    </h2>
+                    <div class="w-16 h-1 bg-brandGreen rounded-full mt-4"></div>
+                </div>
+                <p class="text-base text-gray-500 max-w-md leading-relaxed font-sans">
+                    Unsere physiotherapeutischen Leistungen richten sich an Privatversicherte und Selbstzahler. Wir fokussieren uns auf ganzheitliche Konzepte.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="group relative bg-brandGreenSoft p-8 md:p-10 rounded-2xl border border-transparent hover:border-brandGreen/20 shadow-sm hover:shadow-md transition-all duration-300 reveal">
+                    <div class="absolute top-6 right-8 text-5xl text-brandGreen/10 font-bold font-heading">01</div>
+                    <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-white text-brandGreen text-3xl mb-8 shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
+                        <iconify-icon icon="solar:medical-kit-bold-duotone"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl tracking-tight text-brandGreen mb-4 font-bold font-heading">Physiotherapeutische Behandlung</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed font-sans">
+                        Gezielte und individuelle Therapie zur Vorbeugung sowie Linderung von Schmerzen. Wir behandeln Funktionsstörungen Ihres Bewegungsapparates mit modernen Konzepten der Physiotherapie.
+                    </p>
+                    <ul class="mt-6 space-y-2 text-xs font-semibold text-brandGreen/80">
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Gezielte Schmerzlinderung</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Mobilisation & Prävention</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Privat & Selbstzahler</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group relative bg-brandGreenSoft p-8 md:p-10 rounded-2xl border border-transparent hover:border-brandGreen/20 shadow-sm hover:shadow-md transition-all duration-300 reveal">
+                    <div class="absolute top-6 right-8 text-5xl text-brandGreen/10 font-bold font-heading">02</div>
+                    <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-white text-brandGreen text-3xl mb-8 shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
+                        <iconify-icon icon="solar:dumbbells-bold-duotone"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl tracking-tight text-brandGreen mb-4 font-bold font-heading">Individuelles Personal Training</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed font-sans">
+                        Hocheffizientes Einzeltraining, perfekt abgestimmt auf Ihre persönlichen und sportlichen Ziele. Wir erarbeiten einen Plan, der genau zu Ihren Voraussetzungen und Ihrem Alltag passt.
+                    </p>
+                    <ul class="mt-6 space-y-2 text-xs font-semibold text-brandGreen/80">
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Intensives 1:1 Einzeltraining</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Fokus auf Ihre Fitness & Kraft</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Motivation & korrekte Ausführung</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group relative bg-brandGreenSoft p-8 md:p-10 rounded-2xl border border-transparent hover:border-brandGreen/20 shadow-sm hover:shadow-md transition-all duration-300 reveal">
+                    <div class="absolute top-6 right-8 text-5xl text-brandGreen/10 font-bold font-heading">03</div>
+                    <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-white text-brandGreen text-3xl mb-8 shadow-sm group-hover:-translate-y-1 transition-transform duration-300">
+                        <iconify-icon icon="solar:refresh-circle-bold-duotone"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl tracking-tight text-brandGreen mb-4 font-bold font-heading">Kombination Training & Therapie</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed font-sans">
+                        Der ganzheitliche und nachhaltige Ansatz für Alltag und Sport. Wir verbinden das Beste aus der Akuttherapie mit gezieltem Kraft- und Beweglichkeitstraining für langfristigen Erfolg.
+                    </p>
+                    <ul class="mt-6 space-y-2 text-xs font-semibold text-brandGreen/80">
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Nachhaltige Verbesserung</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Keine kurzfristigen Effekte</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="solar:check-square-bold-duotone"></iconify-icon> Ideal für Sportler & Wiedereinsteiger</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-24 bg-brandGreenSoft" id="philosophie">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-6 reveal">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brandGreen font-heading bg-white px-3 py-1 rounded-md">Unsere Philosophie</span>
+                    </div>
+                    
+                    <h2 class="text-3xl md:text-5xl tracking-tight text-gray-900 leading-tight mb-6 font-normal font-heading">
+                        Langfristige Gesundheit braucht aktive Begleitung.
+                    </h2>
+                    
+                    <div class="w-16 h-1 bg-brandGreen rounded-full mb-8"></div>
+                    
+                    <p class="text-lg md:text-xl text-brandGreen leading-relaxed mb-8 font-medium italic">
+                        "Ein starker Körper kennt keinen Schmerz."
+                    </p>
+                    
+                    <p class="text-base text-gray-600 leading-relaxed mb-8 font-sans">
+                        Unsere Behandlungs- und Trainingskonzepte basieren auf wissenschaftlich fundierten Erkenntnissen. Statt rein symptomatischer Linderung, setzen wir bei STATIC Physiotherapie auf die Behebung der Ursachen Ihrer Beschwerden. Die geschickte Verschmelzung aus physikalischer Therapie und funktioneller Belastungssteigerung ermöglicht Ihnen ein schmerzfreies Leben.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-white text-brandGreen text-2xl shadow-sm">
+                                <iconify-icon icon="solar:shield-up-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900 mb-1">Qualifizierte Einzelbetreuung</h4>
+                                <p class="text-xs text-gray-600 leading-relaxed">Keine Fließbandarbeit. Wir nehmen uns die Zeit, die Ihr Körper benötigt, um Höchstleistung zu erbringen.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-white text-brandGreen text-2xl shadow-sm">
+                                <iconify-icon icon="solar:star-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900 mb-1">Modernes Praxisequipment</h4>
+                                <p class="text-xs text-gray-600 leading-relaxed">Hochwertiges Trainingsequipment für ein effektives, gezieltes Rehabilitations- und Krafttraining.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 reveal flex justify-center">
+                    <div class="relative bg-white p-6 rounded-3xl shadow-xl max-w-md border border-gray-100 flex flex-col items-center">
+                        <!-- Displaying the square branding element nicely -->
+                        <img src="static-physio-logo.png" alt="STATIC Physiotherapie Wiesbaden" class="w-24 h-24 object-cover rounded-2xl mb-6 shadow-md">
+                        <blockquote class="text-center italic text-gray-700 font-medium mb-4">
+                            "Unser therapeutischer Ansatz hilft Ihnen, Ihren Körper besser zu verstehen und gezielt zu stärken, um Schmerzen nachhaltig zu eliminieren."
+                        </blockquote>
+                        <cite class="text-xs uppercase tracking-widest font-bold text-brandGreen not-italic font-heading">Alessio Gulino — Inhaber</cite>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Flyer Showcase Section -->
+    <section id="flyer" class="py-24 bg-white border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left text / features of the flyer -->
+                <div class="lg:col-span-6 space-y-6 reveal">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brandGreen font-heading bg-brandGreenSoft px-3 py-1 rounded-md">Praxis-Card & Informationen</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-normal font-heading tracking-tight text-gray-900">
+                        Unser Service-Angebot auf einen Blick.
+                    </h2>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        Hier sehen Sie unseren offiziellen Praxis-Flyer mit den wichtigsten Eckdaten. Bei STATIC Physiotherapie in der Moritzstraße 37 bieten wir maßgeschneiderte Programme an, die optimal auf Ihre gesundheitlichen Bedürfnisse zugeschnitten sind.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <span class="text-brandGreen text-xl mt-1"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon></span>
+                            <p class="text-sm text-gray-700"><strong>Schnelle Terminabsprache:</strong> Gerne auch unkompliziert per WhatsApp unter <strong class="text-brandGreen">0175-9262803</strong>.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-brandGreen text-xl mt-1"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon></span>
+                            <p class="text-sm text-gray-700"><strong>Zentrale Lage:</strong> Die Praxis befindet sich in der Moritzstraße 37 im Herzen von Wiesbaden.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-brandGreen text-xl mt-1"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon></span>
+                            <p class="text-sm text-gray-700"><strong>Privat & Selbstzahler:</strong> Perfekte Bedingungen für intensive Behandlungen und professionelle Trainingsbetreuung.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-6">
+                        <a href="https://wa.me/491759262803" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md">
+                            <iconify-icon icon="ic:baseline-whatsapp" class="text-xl"></iconify-icon>
+                            Über WhatsApp schreiben
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right column: Verbatim Reference to image_a2acf1.png -->
+                <div class="lg:col-span-6 flex justify-center reveal">
+                    <div class="relative bg-gray-50 p-4 rounded-[32px] border border-gray-100 shadow-xl max-w-md group overflow-hidden">
+                        <!-- Direct rendering of image_a2acf1.png -->
+                        <img src="image_a2acf1.png" alt="STATIC Physiotherapie Info Flyer" class="w-full h-auto rounded-2xl object-cover shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
+                        <div class="absolute bottom-6 right-6 bg-brandGreen text-white px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-widest font-bold font-heading shadow-md">
+                            Praxis Flyer
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA, Map and Contact Section -->
+    <section id="contact" class="py-24 bg-brandGreenSoft relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-xs font-bold uppercase tracking-widest text-brandGreen font-heading bg-white px-3 py-1 rounded-md">Jetzt Termin sichern</span>
+                <h2 class="text-3xl md:text-5xl font-normal font-heading tracking-tight text-gray-900 mt-4">
+                    Ihr Weg zu uns.
+                </h2>
+                <div class="w-16 h-1 bg-brandGreen rounded-full mx-auto mt-4 mb-6"></div>
+                <p class="text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+                    Kontaktieren Sie uns unkompliziert per Telefon oder WhatsApp für Rückfragen, oder buchen Sie Ihren Wunschtermin direkt rund um die Uhr online über Doctolib.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Card 1: Praxis & Anfahrt -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-between reveal">
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-brandGreenSoft flex items-center justify-center text-brandGreen text-2xl shadow-sm shrink-0">
+                                <iconify-icon icon="solar:map-point-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 font-heading">Unsere Adresse</h4>
+                                <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                                    Moritzstraße 37<br>
+                                    65185 Wiesbaden
+                                </p>
+                                <p class="text-xs text-gray-500 italic mt-2">Zentrale Lage in Wiesbaden-Mitte</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-brandGreenSoft flex items-center justify-center text-brandGreen text-2xl shadow-sm shrink-0">
+                                <iconify-icon icon="solar:clock-square-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 font-heading">Termine nach Vereinbarung</h4>
+                                <p class="text-sm text-gray-600 mt-1">Sowohl für Privatversicherte als auch für Selbstzahler.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-8 border-t border-gray-100 mt-8">
+                        <a href="https://maps.google.com/?q=Moritzstraße+37,+65185+Wiesbaden" 
+                           target="_blank" 
+                           class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-brandGreen/20 text-brandGreen font-bold rounded-xl hover:bg-brandGreenSoft transition-all duration-300 text-sm uppercase tracking-wider font-heading">
+                            <iconify-icon icon="solar:routing-bold-duotone" class="text-lg"></iconify-icon>
+                            Route in Google Maps planen
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Kontakt & Buchen -->
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-between reveal">
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-brandGreenSoft flex items-center justify-center text-brandGreen text-2xl shadow-sm shrink-0">
+                                <iconify-icon icon="solar:calendar-date-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 font-heading">Direkte Online-Buchung</h4>
+                                <p class="text-sm text-gray-600 mt-1">Wählen Sie Ihren Wunschtermin unkompliziert rund um die Uhr direkt über Doctolib aus.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-brandGreenSoft flex items-center justify-center text-brandGreen text-2xl shadow-sm shrink-0">
+                                <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 font-heading">Mobil &amp; WhatsApp Chat</h4>
+                                <p class="text-sm text-brandGreen font-bold mt-1 text-xl">0175-9262803</p>
+                                <p class="text-xs text-gray-500 italic mt-1">Gerne können Sie uns auch einfach eine WhatsApp-Nachricht schicken.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8 border-t border-gray-100 mt-8">
+                        <a href="https://www.doctolib.de/physiotherapie/wiesbaden/alessio-gulino?pid=practice-754459&utm_source=google_appointment_redirect&utm_campaign=gmb&utm_medium=organic&rwg_token=AE37R_i5X8fpCUjFRjcD0_JEyOYvzPGfyfuFTlF-Hzb72hBrG0KX4-wJdtAj2TxqCF1mJwhfFHQrBP4TyuZDGwRXhLm0U7fHiA%3D%3D" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center justify-center gap-2 px-4 py-4 bg-brandGreen text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-brandGreenLight shadow-md transition-all duration-300 font-heading">
+                            <iconify-icon icon="solar:calendar-date-bold-duotone" class="text-base"></iconify-icon>
+                            Doctolib Termin
+                        </a>
+                        <a href="https://wa.me/491759262803" 
+                           target="_blank" 
+                           class="inline-flex items-center justify-center gap-2 px-4 py-4 bg-green-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-green-700 shadow-md transition-all duration-300 font-heading">
+                            <iconify-icon icon="ic:baseline-whatsapp" class="text-lg"></iconify-icon>
+                            WhatsApp Chat
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brandDark text-white pt-20 pb-10 relative overflow-hidden">
+        <div class="absolute top-0 inset-x-0 h-1.5 bg-brandGreen"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                
+                <!-- Left brand/address info -->
+                <div class="md:col-span-5 lg:col-span-4 space-y-6">
+                    <a href="#" class="flex items-center gap-3">
+                        <img src="static-physio-logo.png" alt="STATIC Physiotherapie Logo" class="h-12 w-12 rounded-xl object-cover">
+                        <div class="flex flex-col">
+                            <span class="font-heading font-bold text-xl text-white tracking-wider leading-none">STATIC</span>
+                            <span class="text-[10px] uppercase tracking-widest text-brandGreenLight font-bold">Physiotherapie</span>
+                        </div>
+                    </a>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Ihre moderne Physiotherapie-Praxis in Wiesbaden. Wir glauben an starke Körper, funktionelle Bewegung und die nachhaltige Heilung von innen heraus.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="https://instagram.com/static.physio" target="_blank" class="w-10 h-10 rounded-xl border border-gray-800 flex items-center justify-center hover:bg-brandGreen hover:text-white hover:border-brandGreen transition-all">
+                            <iconify-icon icon="solar:camera-bold-duotone" class="text-xl"></iconify-icon>
+                        </a>
+                        <a href="https://wa.me/491759262803" target="_blank" class="w-10 h-10 rounded-xl border border-gray-800 flex items-center justify-center hover:bg-brandGreen hover:text-white hover:border-brandGreen transition-all">
+                            <iconify-icon icon="ic:baseline-whatsapp" class="text-xl"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Middle section: Links -->
+                <div class="md:col-span-3 lg:col-span-2 lg:col-start-7">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brandGreenLight mb-6 font-heading">Navigation</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Leistungen</a></li>
+                        <li><a href="#philosophie" class="hover:text-white transition-colors">Philosophie</a></li>
+                        <li><a href="#flyer" class="hover:text-white transition-colors">Praxis-Info</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-2 lg:col-span-2">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brandGreenLight mb-6 font-heading">Leistungen</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#services" class="hover:text-white transition-colors">Physiotherapie</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Personal Training</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Therapie &amp; Training</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-2 lg:col-span-2">
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brandGreenLight mb-6 font-heading">Rechtliches</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Impressum</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Datenschutz</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-800">
+                <p class="text-xs text-gray-500">© 2026 STATIC Physiotherapie Wiesbaden. Alle Rechte vorbehalten.</p>
+                <p class="text-xs text-gray-500">Inhaber: Alessio Gulino</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Logic for animations and interactivity -->
+    <script>
+        // Simple Intersection Observer for reveal animations
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.reveal').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('pointer-events-none')) {
+                // Open menu
+                mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
+                mobileMenuContent.classList.remove('translate-x-full');
+            } else {
+                // Close menu
+                mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+                mobileMenuContent.classList.add('translate-x-full');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) toggleMenu();
+        });
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    </script>
+
+</body>
+</html>
